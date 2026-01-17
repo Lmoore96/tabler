@@ -1,6 +1,7 @@
 [build]
   # Build command: Install dependencies from root, then build preview site
-  command = "pnpm install && cd preview && NODE_ENV=preview pnpm build"
+  # Note: NODE_ENV must be set in the command, not just in environment section
+  command = "pnpm install && cd preview && pnpm build"
   # Publish directory: Where the built static site files are located
   publish = "preview/dist"
 
