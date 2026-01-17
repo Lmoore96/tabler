@@ -1,0 +1,15 @@
+[build]
+  # Build command: Build the preview site
+  command = "cd preview && pnpm build"
+  # Publish directory: Where the built static site files are located
+  publish = "preview/dist"
+
+[build.environment]
+  # Use Node.js 18 or later (Netlify's default, but explicit is better)
+  NODE_VERSION = "18"
+
+# If you want to deploy the docs site instead, use this configuration:
+# [build]
+#   command = "cd docs && pnpm build"
+#   publish = "docs/dist"
+
