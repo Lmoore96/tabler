@@ -1,7 +1,7 @@
 [build]
-  # Build command: Install dependencies from root, then build preview site
-  # Note: NODE_ENV must be set in the command, not just in environment section
-  command = "pnpm install && cd preview && pnpm build"
+  # Build command: Install dependencies, build core package, then build preview site
+  # Core must be built first because preview depends on core/dist files
+  command = "pnpm install && pnpm --filter @tabler/core build && cd preview && NODE_ENV=preview pnpm build"
   # Publish directory: Where the built static site files are located
   publish = "preview/dist"
 
