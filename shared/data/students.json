@@ -1,0 +1,58 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone": "(555) 123-4567",
+      "lessonPlan": "Piano - Beginner",
+      "monthlyPayment": 200,
+      "status": "active",
+      "teacher": "Jane Smith",
+      "teacherPercentage": 60
+    },
+    {
+      "id": 2,
+      "name": "Sarah Johnson",
+      "email": "sarah.j@example.com",
+      "phone": "(555) 234-5678",
+      "lessonPlan": "Guitar - Intermediate",
+      "monthlyPayment": 250,
+      "status": "active",
+      "teacher": "Mike Davis",
+      "teacherPercentage": 60
+    },
+    {
+      "id": 3,
+      "name": "Emily Wilson",
+      "email": "emily.w@example.com",
+      "phone": "(555) 345-6789",
+      "lessonPlan": "Voice - Advanced",
+      "monthlyPayment": 300,
+      "status": "active",
+      "teacher": "Jane Smith",
+      "teacherPercentage": 60
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "phone": "(555) 111-2222",
+      "specialty": "Piano, Voice",
+      "studentCount": 2,
+      "percentage": 60
+    },
+    {
+      "id": 2,
+      "name": "Mike Davis",
+      "email": "mike.davis@example.com",
+      "phone": "(555) 333-4444",
+      "specialty": "Guitar, Bass",
+      "studentCount": 1,
+      "percentage": 60
+    }
+  ]
+}
+
