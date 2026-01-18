@@ -1,11 +1,4 @@
 <div class="btn-list">
-	<span class="d-none d-sm-inline">
-		{% if layout-navbar-overlap and layout-navbar-dark %}
-		{% include "ui/button.html" text="New view" color="dark" id="btn-new-view" %}
-		{% else %}
-		{% include "ui/button.html" text="New view" id="btn-new-view" %}
-		{% endif %}
-	</span>
 	{% include "ui/button.html" icon="plus" text="Create new report" color="primary" class="d-none d-sm-inline-block" modal-id="report" %}
 	{% include "ui/button.html" icon="plus" icon-only=true color="primary" class="d-sm-none" text="Create new report" modal-id="report" %}
 </div>
