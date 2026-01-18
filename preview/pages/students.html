@@ -1,0 +1,156 @@
+---
+title: Students
+page-header: Students
+page-header-pretitle: Student Management
+page-menu: students
+layout: default
+permalink: students.html
+---
+
+<div class="row row-cards">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Student List</h3>
+				<div class="card-actions">
+					<button class="btn btn-primary btn-sm" id="btn-add-student">
+						{% include "ui/icon.html" icon="plus" %} Add Student
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="mb-3">
+					<div class="input-icon">
+						<span class="input-icon-addon">
+							{% include "ui/icon.html" icon="search" %}
+						</span>
+						<input type="text" class="form-control" placeholder="Search students..." id="student-search" aria-label="Search students">
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-vcenter" id="students-table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>Lesson Plan</th>
+								<th>Teacher</th>
+								<th>Monthly Payment</th>
+								<th>Status</th>
+								<th class="w-1"></th>
+							</tr>
+						</thead>
+						<tbody id="students-tbody">
+							<!-- Student data will be populated by JavaScript -->
+							<tr>
+								<td colspan="8" class="text-center text-secondary">
+									<div class="py-3">
+										<p>Loading students...</p>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row row-cards mt-3">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex align-items-center">
+					<div class="subheader">Total Students</div>
+				</div>
+				<div class="h1 mb-3"><span id="total-students-count">0</span></div>
+				<div class="text-secondary">Active: <span id="active-students-count">0</span></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex align-items-center">
+					<div class="subheader">Total Monthly Income</div>
+				</div>
+				<div class="h1 mb-3">$<span id="total-monthly-income">0</span></div>
+				<div class="text-secondary">From students</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex align-items-center">
+					<div class="subheader">Average Payment</div>
+				</div>
+				<div class="h1 mb-3">$<span id="average-payment">0</span></div>
+				<div class="text-secondary">Per student</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% capture_script %}
+<script>
+// Load and display student data (reusing from dashboard)
+if (typeof loadStudioData === 'function') {
+	loadStudioData().then(() => {
+		// Update student page specific stats
+		const students = document.querySelectorAll('#students-tbody tr').length
+		const activeStudents = document.querySelectorAll('#students-tbody tr .badge.bg-green').length
+		
+		const totalStudentsEl = document.querySelector("#total-students-count")
+		const activeStudentsEl = document.querySelector("#active-students-count")
+		
+		if (totalStudentsEl) totalStudentsEl.textContent = students.toString()
+		if (activeStudentsEl) activeStudentsEl.textContent = activeStudents.toString()
+		
+		// Calculate monthly income
+		const paymentCells = document.querySelectorAll('#students-tbody tr td:nth-child(6)')
+		let totalIncome = 0
+		paymentCells.forEach(cell => {
+			const text = cell.textContent.trim()
+			const amount = parseInt(text.replace('$', '')) || 0
+			totalIncome += amount
+		})
+		
+		const totalIncomeEl = document.querySelector("#total-monthly-income")
+		const avgPaymentEl = document.querySelector("#average-payment")
+		
+		if (totalIncomeEl) totalIncomeEl.textContent = totalIncome.toString()
+		if (avgPaymentEl && students > 0) {
+			avgPaymentEl.textContent = Math.round(totalIncome / students).toString()
+		}
+	})
+}
+
+// Search functionality
+const searchInput = document.querySelector("#student-search")
+if (searchInput) {
+	searchInput.addEventListener("input", function(e) {
+		const searchTerm = e.target.value.toLowerCase()
+		const rows = document.querySelectorAll("#students-tbody tr")
+		
+		rows.forEach(row => {
+			const text = row.textContent.toLowerCase()
+			row.style.display = text.includes(searchTerm) ? "" : "none"
+		})
+	})
+}
+
+// Add student button
+const addStudentBtn = document.querySelector("#btn-add-student")
+if (addStudentBtn) {
+	addStudentBtn.addEventListener("click", function(e) {
+		e.preventDefault()
+		// TODO: Open modal or navigate to add student form
+		alert("Add student functionality coming soon!")
+	})
+}
+</script>
+{% endcapture_script %}
+
